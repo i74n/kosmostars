@@ -1,9 +1,14 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <string>
+
 #include "Entity.h"
-#include "Asteroid.h"
 #include "Map.h"
+#include "Player.h"
+#include "Laser.h"
+#include "Asteroid.h"
+#include "Bonus.h"
+
 using namespace sf;
 
 class Game{
