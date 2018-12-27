@@ -1,6 +1,5 @@
 #pragma once
 #include "Entity.h"
-#include "Bonus.h"
 
 class Player:public Entity{
 	int scores;

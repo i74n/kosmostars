@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <string>
 #include "Entity.h"
 #include "Asteroid.h"
 #include "Map.h"
