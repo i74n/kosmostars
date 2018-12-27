@@ -1,6 +1,5 @@
 #include "Entity.h"
 
-
 void Entity::makeTexture(std::string path, float scale){
 	texture.loadFromFile(path); // загружаем изображение игрока
 	sprite.setTexture(texture);
