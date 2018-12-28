@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <list>
 
 #include "Entity.h"
 #include "Map.h"
@@ -11,6 +12,27 @@
 using namespace sf;
 
 class Game{
+	VideoMode desktop;
+	RenderWindow window;
+
+	Font font;
+	Text text;
+
+	Clock clock; 
+
+	Player * player;
+	Map * map;
+
+	Image asteroidImage;
+	Image laserImage;
+	Image bonusImage;
+	Image explosionImage;
+	Image playerImage;
+	Image mapImage;
+
+	std::list<Asteroid*> asteroids;
+	std::list<Laser*> lasers;
+	std::list<Bonus*> bonuses;
 public:
 	Game();
 	~Game();

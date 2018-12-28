@@ -1,6 +1,6 @@
 #include "Bonus.h"
 
-Bonus::Bonus(Vector2f playerPose){
+Bonus::Bonus(Image & image, Vector2f playerPose){
 	buff = static_cast<Buff>(rand()%2);
 	std::string img;
 	switch(buff){

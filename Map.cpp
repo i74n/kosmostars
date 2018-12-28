@@ -1,7 +1,7 @@
 #include "Map.h"
 
-Map::Map(){
-	makeTexture("images/cosmos.png", 1);
+Map::Map(Image & image){
+	makeTexture(image, 1);
 	displace = 0;
 }
 

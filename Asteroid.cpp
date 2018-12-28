@@ -1,6 +1,6 @@
 #include "Asteroid.h"
 
-Asteroid::Asteroid(){
+Asteroid::Asteroid(Image & image){
 	explosionFrame = 0; 
 	setScale();
 
@@ -9,11 +9,7 @@ Asteroid::Asteroid(){
 	speed.y = 0;
 	reward = 12*scale;
 	
-	switch (rand()%2){
-	case 0: makeTexture("images/asteroid0.png", scale);break;
-	case 1: makeTexture("images/asteroid1.png", scale);break;
-	case 2: makeTexture("images/asteroid2.png", scale);break;
-	}
+	makeTexture(image, rand()%2, 0, scale);
 
 	setPosition(900, rand()%(540-size.x));
 
@@ -22,7 +18,7 @@ Asteroid::Asteroid(){
 	explosionSprite.setScale(3*scale, 3*scale); 
 }
 
-Asteroid::Asteroid(float x, float y, float speedX, float speedY){
+Asteroid::Asteroid(Image & image, float x, float y, float speedX, float speedY){
 	explosionFrame = 0; 
 	scale = 0.25;
 
@@ -31,11 +27,7 @@ Asteroid::Asteroid(float x, float y, float speedX, float speedY){
 	speed.y = speedY;
 	reward = 3;
 
-	switch (rand()%2){
-	case 0: makeTexture("images/asteroid0.png", scale);break;
-	case 1: makeTexture("images/asteroid1.png", scale);break;
-	case 2: makeTexture("images/asteroid2.png", scale);break;
-	}
+	makeTexture(image, rand()%2, 0, scale);
 
 	setPosition(x, y);
 

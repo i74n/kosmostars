@@ -1,29 +1,31 @@
 #include "Game.h"
-#include <list>
 #include <cstdlib>
 #include <ctime>
 
-Game::Game(){}
+Game::Game(){
+	srand(time(NULL));
+	desktop = VideoMode::getDesktopMode();
+	window.create(VideoMode(960, 540, desktop.bitsPerPixel), "COSMOSTARS");
+	
+	font.loadFromFile("FONT.ttf");//передаем нашему шрифту файл шрифта
+	text.setCharacterSize(20);
+	text.setColor(Color::Red);//покрасили текст в красный	
+
+	asteroidImage.loadFromFile("images/asteroids.png");
+	laserImage.loadFromFile("images/laser.png");
+	bonusImage.loadFromFile("images/bonuses.png");
+	explosionImage.loadFromFile("images/explosion.png");
+	playerImage.loadFromFile("images/ship.png");
+	mapImage.loadFromFile("images/cosmos.png");
+
+	player = new Player(playerImage);
+	map = new Map(mapImage);
+}
+
 Game::~Game(){}
 
 void Game::play(){
-	srand(time(NULL));
-	VideoMode desktop = VideoMode::getDesktopMode();
-	RenderWindow window(VideoMode(960, 540, desktop.bitsPerPixel), "COSMOSTARS");
 
-	Font font;//шрифт 
-	font.loadFromFile("FONT.ttf");//передаем нашему шрифту файл шрифта
-	Text text("", font, 35);//создаем объект текст
-	text.setColor(Color::Red);//покрасили текст в красный	
-
-	Player* player = new Player;
-	Map* map = new Map;
-
-	std::list<Asteroid*> asteroids;
-	std::list<Laser*> lasers;
-	std::list<Bonus*> bonuses;
-
-	Clock clock; 
 	float asteroid_cooldown = 0;
 
 	while (window.isOpen()){

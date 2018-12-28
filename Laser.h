@@ -4,7 +4,7 @@
 
 class Laser:public Entity{
 public:
-	Laser(const Player * player);
+	Laser(Image & image, const Player * player);
 	Status update(float time);
 	void hit();
 };

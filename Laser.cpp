@@ -1,7 +1,7 @@
 #include "Laser.h"
 
-Laser::Laser(const Player * player){
-	makeTexture("images/bullet.png");
+Laser::Laser(Image & image, const Player * player){
+	makeTexture(image);
 
 	setPosition(player->position.x + player->size.x,
 		player->position.y + player->size.y/2 - this->size.y/2

@@ -1,10 +1,10 @@
 #include "Player.h"
 #include <sstream>
 
-Player::Player(){
+Player::Player(Image & image){
 	scores = 1000;
 	shot_cooldown = 0;
-	makeTexture("images/ship.png");
+	makeTexture(image);
 	setPosition(0, 270);
 }
 

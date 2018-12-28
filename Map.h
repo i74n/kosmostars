@@ -4,7 +4,7 @@
 class Map:public Entity{
 	float displace;
 public:
-	Map();
+	Map(Image & image);
 	Status update(float time);
 	bool isAlive();
 };
