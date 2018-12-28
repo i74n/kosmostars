@@ -1,5 +1,4 @@
 #include "Laser.h"
-#include "Player.h"
 
 Laser::Laser(const Player * player){
 	makeTexture("images/bullet.png");

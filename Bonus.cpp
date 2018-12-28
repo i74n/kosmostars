@@ -26,5 +26,7 @@ Status Bonus::update(float time){
 }
 
 
-Buff Bonus::getBuff(){return buff;}
+Buff Bonus::getBuff(){
+	return buff;
+}
  
