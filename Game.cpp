@@ -2,7 +2,8 @@
 #include <cstdlib>
 #include <ctime>
 
-Game::Game(){
+Game::Game()
+{
     srand(time(NULL));
     desktop = VideoMode::getDesktopMode();
     window.create(VideoMode(960, 540, desktop.bitsPerPixel), "COSMOSTARS");
@@ -25,7 +26,8 @@ Game::Game(){
 
 Game::~Game() {}
 
-void Game::play(){
+void Game::play()
+{
     float asteroid_cooldown = 0;
 
     while (window.isOpen() && player->getStatus() != dead) {
@@ -37,27 +39,28 @@ void Game::play(){
         window.clear();
 
         float time = clock.getElapsedTime().asSeconds();
-		window.draw(map->getSprite());
+        window.draw(map->getSprite());
         window.draw(player->getSprite());
 
         map->update(time);
-        switch (player->update(time)){
-		case shoot: 
-			lasers.push_back(new Laser(laserImage, player));
-			break;
-		case DEMOLISH:
-			for (auto asteroid = asteroids.begin(); asteroid != asteroids.end(); asteroid++)
-				(*asteroid) -> hp = 0;
-			break;
-		}
+        switch (player->update(time)) {
+        case shoot:
+            lasers.push_back(new Laser(laserImage, player));
+            break;
+        case DEMOLISH:
+            for (auto asteroid = asteroids.begin(); asteroid != asteroids.end(); asteroid++)
+                (*asteroid)->hp = 0;
+            break;
+        }
         for (auto bonus = bonuses.begin(); bonus != bonuses.end();) {
             window.draw((*bonus)->getSprite());
-            if ((*bonus)->update(time) == outboard){
-				delete *bonus;
+            if ((*bonus)->update(time) == outboard) {
+                delete *bonus;
                 bonus = bonuses.erase(bonus);
-			}else if (player->intersects(*bonus)) {
+            }
+            else if (player->intersects(*bonus)) {
                 player->setBuff((*bonus)->getBuff());
-				delete *bonus;
+                delete *bonus;
                 bonus = bonuses.erase(bonus);
             }
             else
@@ -66,10 +69,11 @@ void Game::play(){
 
         for (auto laser = lasers.begin(); laser != lasers.end();) {
             window.draw((*laser)->getSprite());
-            if ((*laser)->update(time) == del){
-				delete *laser;
+            if ((*laser)->update(time) == del) {
+                delete *laser;
                 laser = lasers.erase(laser);
-			}else {
+            }
+            else {
                 for (auto asteroid = asteroids.begin(); asteroid != asteroids.end(); asteroid++)
                     if ((*laser)->intersects(*asteroid)) {
                         (*asteroid)->getDamage();
@@ -89,7 +93,7 @@ void Game::play(){
             switch ((*asteroid)->update(time)) {
             case outboard:
                 player->setScores(-(*asteroid)->getReward());
-				delete *asteroid;
+                delete *asteroid;
                 asteroid = asteroids.erase(asteroid);
                 continue;
             case exploding:
@@ -99,7 +103,7 @@ void Game::play(){
             case exploded:
                 if ((*asteroid)->hp != 0)
                     player->setScores((*asteroid)->getReward());
-				delete *asteroid;
+                delete *asteroid;
                 asteroid = asteroids.erase(asteroid);
                 continue;
             case dead:
@@ -129,24 +133,24 @@ void Game::play(){
 
         text.setString("SCORES: " + player->getScores());
         text.setPosition(000, 0);
-        window.draw(text); 
-		if (player-> getBuff() != nobuff){
-			std::string buff;
-			if (player-> getBuff() == x2) 
-				buff = "X2";
-			if (player-> getBuff() == shield)
-				buff = "SHIELD";
-			text.setString(buff + " TIME: " + player->getBuffTimeLeft());
-			text.setPosition(500, 0);
-			window.draw(text); 
-		}
+        window.draw(text);
+        if (player->getBuff() != nobuff) {
+            std::string buff;
+            if (player->getBuff() == x2)
+                buff = "X2";
+            if (player->getBuff() == shield)
+                buff = "SHIELD";
+            text.setString(buff + " TIME: " + player->getBuffTimeLeft());
+            text.setPosition(500, 0);
+            window.draw(text);
+        }
         window.display();
         clock.restart();
     }
 
-	if(player->getStatus() == dead){
-	int i = 0;
-	while(i++<1000)
-		std::cout << "YOU LOSE ";
-	}
+    if (player->getStatus() == dead) {
+        int i = 0;
+        while (i++ < 1000)
+            std::cout << "YOU LOSE ";
+    }
 }
