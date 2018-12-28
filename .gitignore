@@ -6,7 +6,8 @@
 *.user
 *.sln.docstates
 # Build results
-[Dd]ebug/
+![Dd]ebug/*
+[Dd]ebug/*
 ![Dd]ebug/*.dll
 [Rr]elease/
 x64/
@@ -26,6 +27,11 @@ ipch/
 # Visual Studio profiler
 *.psess
 *.vsp
+
+
+
+
+
 *.vspx
 # Guidance Automation Toolkit
 *.gpState
