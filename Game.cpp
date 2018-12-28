@@ -12,7 +12,7 @@ void Game::play(){
 	RenderWindow window(VideoMode(960, 540, desktop.bitsPerPixel), "COSMOSTARS");
 
 	Font font;//шрифт 
-	font.loadFromFile("CyrilicOld.ttf");//передаем нашему шрифту файл шрифта
+	font.loadFromFile("FONT.ttf");//передаем нашему шрифту файл шрифта
 	Text text("", font, 35);//создаем объект текст
 	text.setColor(Color::Red);//покрасили текст в красный	
 
@@ -92,10 +92,10 @@ void Game::play(){
 				continue;
 			case dead:
 				if ((*asteroid)->getScale() == 1) {
-					asteroids.push_back(new Asteroid((*asteroid)->position.x, (*asteroid)->position.y, 4, -2));
-					asteroids.push_back(new Asteroid((*asteroid)->position.x, (*asteroid)->position.y, 4, 2));
-					asteroids.push_back(new Asteroid((*asteroid)->position.x, (*asteroid)->position.y, -4, -2));
-					asteroids.push_back(new Asteroid((*asteroid)->position.x, (*asteroid)->position.y, -4, 2));
+					asteroids.push_front(new Asteroid((*asteroid)->position.x, (*asteroid)->position.y, 4, -2));
+					asteroids.push_front(new Asteroid((*asteroid)->position.x, (*asteroid)->position.y, 4, 2));
+					asteroids.push_front(new Asteroid((*asteroid)->position.x, (*asteroid)->position.y, -4, -2));
+					asteroids.push_front(new Asteroid((*asteroid)->position.x, (*asteroid)->position.y, -4, 2));
 				}
 				asteroid++;
 				continue;
@@ -106,7 +106,7 @@ void Game::play(){
 				}else
 					window.draw((*asteroid)->getSprite());
 				asteroid++;
-				break;
+				continue;
 			}
 		}
 
