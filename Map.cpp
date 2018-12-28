@@ -1,7 +1,7 @@
 #include "Map.h"
 
 Map::Map(Image & image){
-	makeTexture(image, 1);
+	makeTexture(image);
 	displace = 0;
 }
 

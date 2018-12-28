@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <list>
+#include <iostream>
 
 #include "Entity.h"
 #include "Map.h"

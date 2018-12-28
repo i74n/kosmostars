@@ -1,6 +1,6 @@
 #include "Asteroid.h"
 
-Asteroid::Asteroid(Image & image){
+Asteroid::Asteroid(Image & image, Image & explosionImage){
 	explosionFrame = 0; 
 	setScale();
 
@@ -9,16 +9,16 @@ Asteroid::Asteroid(Image & image){
 	speed.y = 0;
 	reward = 12*scale;
 	
-	makeTexture(image, rand()%2, 0, scale);
+	makeTexture(image, rand()%3, 0, scale);
 
 	setPosition(900, rand()%(540-size.x));
 
-	explosionTexture.loadFromFile("images/explosion.png");
+	explosionTexture.loadFromImage(explosionImage);
 	explosionSprite.setTexture(explosionTexture);
-	explosionSprite.setScale(3*scale, 3*scale); 
+	explosionSprite.setScale(scale, scale); 
 }
 
-Asteroid::Asteroid(Image & image, float x, float y, float speedX, float speedY){
+Asteroid::Asteroid(Image & image, Image & explosionImage, float x, float y, float speedX, float speedY){
 	explosionFrame = 0; 
 	scale = 0.25;
 
@@ -27,24 +27,23 @@ Asteroid::Asteroid(Image & image, float x, float y, float speedX, float speedY){
 	speed.y = speedY;
 	reward = 3;
 
-	makeTexture(image, rand()%2, 0, scale);
+	makeTexture(image, rand()%3, 0, scale);
 
 	setPosition(x, y);
 
-	explosionTexture.loadFromFile("images/explosion.png");
+	explosionTexture.loadFromImage(explosionImage);
 	explosionSprite.setTexture(explosionTexture);
 	explosionSprite.setScale(0.75, 0.75); 
 }
 
 Status Asteroid::update(float time){
+	if (status == dead) 
+		return status = exploding;
 	if (status == alive){
 		position.x -= speed.x*time*500;
 		position.y -= speed.y*time*500;
 		sprite.setPosition(position);
 	}
-
-	if (status == dead) 
-		return status = exploding;
 	if (explosionFrame >= 10)
 		return status = exploded;
 	if (status == exploding)
@@ -59,10 +58,7 @@ Status Asteroid::update(float time){
 }
 
 void Asteroid::setScale(){
-	if (rand()%100 < 70)
-		scale = 0.5;
-	else 
-		scale = 1; 
+	scale = (rand()%100 < 70) ? 0.5 : 1;
 }
 
 void Asteroid::getDamage(){
@@ -81,7 +77,7 @@ Sprite Asteroid::explosion(float time){
 	int x = (int)explosionFrame%5;
 	int y = (int)(explosionFrame/5);
 	explosionSprite.setTextureRect(IntRect(x * 96, y * 96, 96, 96));
-	explosionSprite.setPosition(position.x-size.x, position.y-size.y);
+	explosionSprite.setPosition(position.x, position.y);
 	explosionFrame += time*100;
 
 	return explosionSprite;

@@ -5,9 +5,15 @@ void Entity::makeTexture(Image & image, int x, int y, float scale){
 	sprite.setTexture(texture);
 	sprite.setTextureRect(IntRect(x*96, y*96, 96, 96));
 	sprite.setScale(scale, scale);
-	Vector2u size2u = texture.getSize();
-	size.x = scale*size2u.x;
-	size.y = scale*size2u.y;
+	size = texture.getSize();
+	size.x *= scale;
+	size.y *= scale;
+}
+
+void Entity::makeTexture(Image & image){
+	texture.loadFromImage(image); // загружаем изображение игрока
+	sprite.setTexture(texture);
+	size = texture.getSize();
 }
 
 void Entity::setPosition(float x, float y){

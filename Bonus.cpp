@@ -1,17 +1,7 @@
 #include "Bonus.h"
 
 Bonus::Bonus(Image & image, Vector2f playerPose){
-	buff = static_cast<Buff>(rand()%2);
-	std::string img;
-	switch(buff){
-	case x2: 
-		img = "x2.png"; break;
-	case demolisher: 
-		img = "demolisher.png";break;
-	case shield: 
-		img = "shield.png";break;
-	}
-	makeTexture("images/" + img, 0.5);
+	makeTexture(image, buff = static_cast<Buff>(rand()%3), 0, 0.5);
 	setPosition(playerPose.x+16, playerPose.y+16);
 }
 
@@ -20,11 +10,10 @@ Status Bonus::update(float time){
 	sprite.setPosition(position);
 
 	if (position.x < -96){
-		return del;
+		return outboard;
 	}
 	return stay;
 }
-
 
 Buff Bonus::getBuff(){
 	return buff;

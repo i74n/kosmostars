@@ -2,8 +2,8 @@
 
 #include <SFML/Graphics.hpp>
 
-enum Buff {x2, demolisher, shield};
-enum Status {del, alive, exploding, exploded, outboard, make, stay, dead};
+enum Buff {demolisher, x2, shield, nobuff};
+enum Status {del, alive, exploding, exploded, outboard, shoot, stay, dead, DEMOLISH};
 
 using namespace sf;
 
@@ -17,6 +17,7 @@ public:
 	Vector2u size;
 
 	void makeTexture(Image & image, int x, int y, float scale = 1);
+	void makeTexture(Image & image);
 	void setPosition(float x, float y);
 	Sprite getSprite();
 	bool intersects(Entity * obj);

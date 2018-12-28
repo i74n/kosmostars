@@ -11,8 +11,8 @@ class Asteroid:public Entity{
 	Status status;
 public:
 	int hp;
-	Asteroid(Image & image);
-	Asteroid(Image & image, float x, float y, float speedX, float speedY);
+	Asteroid(Image & image, Image & explosionImage);
+	Asteroid(Image & image, Image & explosionImage, float x, float y, float speedX, float speedY);
 	Status update(float time);
 	void setScale();
 	float getScale();
